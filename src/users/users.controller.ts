@@ -7,12 +7,10 @@ import { UserDTO } from './user.dto';
 @Controller('/users')
 export class UsersController extends BaseCrudController<User> {
   constructor(dataSource: DataSource) {
-    super(User, dataSource);
-  }
+    const validators = {
+      create: UserDTO,
+    };
 
-  /* Override to validate using a DTO */
-  @Post()
-  create(data: UserDTO): Promise<User> {
-    return super.create(data);
+    super(User, dataSource, validators);
   }
 }
