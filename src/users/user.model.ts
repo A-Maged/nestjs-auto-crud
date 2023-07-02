@@ -7,4 +7,7 @@ export class User {
 
   @Column({ unique: true })
   name: string;
+
+  @Column({ nullable: true })
+  country: string;
 }
