@@ -6,13 +6,9 @@ import {
   Param,
   Body,
   NotFoundException,
+  Query,
 } from '@nestjs/common';
-import {
-  Repository,
-  FindOptionsWhere,
-  DataSource,
-  FindManyOptions,
-} from 'typeorm';
+import { Repository, FindOptionsWhere, DataSource } from 'typeorm';
 
 export abstract class BaseCrudController<T extends { id: string }> {
   protected repository: Repository<T>;
@@ -22,8 +18,11 @@ export abstract class BaseCrudController<T extends { id: string }> {
   }
 
   @Get()
-  async findAll(options: FindManyOptions<T> = {}): Promise<T[]> {
-    return this.repository.find(options);
+  async findAll(
+    @Query('take') take?: number,
+    @Query('skip') skip?: number,
+  ): Promise<T[]> {
+    return this.repository.find({ take: take || 10, skip: skip || 0 });
   }
 
   @Get(':id')
@@ -40,8 +39,8 @@ export abstract class BaseCrudController<T extends { id: string }> {
   }
 
   @Post()
-  async create(@Body() data: T): Promise<T> {
-    const entity = this.repository.create(data);
+  async create(@Body() data: any): Promise<T> {
+    const entity = this.repository.create(data as T);
 
     return this.repository.save(entity);
   }
