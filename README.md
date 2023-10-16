@@ -18,6 +18,7 @@ export class CreateUserDTO {
 export class UsersController extends BaseCrudController<User> {
   constructor(dataSource: DataSource) {
     const validators = {
+      /* method name: dto */
       create: CreateUserDTO,
     };
 
