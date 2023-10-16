@@ -1,5 +1,5 @@
 # Nestjs Auto Crud 
-Extend `BaseCrudController` to get all CRUD methods for an entity with the option of supplying validators to run befor each method.
+Extend `BaseCrudController` [here](https://github.com/A-Maged/nestjs-auto-crud/blob/main/src/BaseCrudController.ts), to get all CRUD methods for an entity with the option of supplying validators to run before each method.
 
 
 ```ts
